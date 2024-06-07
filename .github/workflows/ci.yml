@@ -33,7 +33,7 @@ jobs:
           tags: ${{ secrets.DOCKER_USERNAME }}/web_project:latest
 
       - name: Verify Docker Image
-        run: docker images ${{ secrets.DOCKER_USERNAME }}web_project:latest
+        run: docker images ${{ secrets.DOCKER_USERNAME }}/web_project:latest
 
       - name: Trigger Render Deployment
         env:
