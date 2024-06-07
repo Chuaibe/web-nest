@@ -1,0 +1,21 @@
+services:
+  app:
+    build: .
+    ports:
+      - "3000:3000"
+    depends_on:
+      - redis
+    environment:
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - DATABASE_URL=${DATABASE_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - PORT=${PORT}
+    volumes:
+      - .:/app
+    command: sh -c "npm install && npm run build && npm start"
+
+  redis:
+    image: "redis:alpine"
+    ports:
+      - "6379:6379"

@@ -18,7 +18,7 @@ import { MessageService } from './messages/message.service';
   imports: [
     BullModule.forRoot({
       connection: {
-        host: 'localhost',
+        host: 'redis',
         port: 6379,
       },
     }),
