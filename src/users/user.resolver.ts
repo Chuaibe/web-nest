@@ -13,12 +13,19 @@ export class UserResolver {
   }
 
   @Query(() => User)
-  async user(id: string): Promise<User> {
-    return await this.userService.getUserById(id)
+  async user(@Args('id') id: string): Promise<User> {
+    return await this.userService.getUserById(id);
+  }
+
+  @Query(() => User)
+  async resetData(): Promise<void> {
+    await this.userService.resetData();
   }
 
   @Mutation(() => User)
-  async createUser(createUserDto :CreateUserDto): Promise<User> {
-    return await this.userService.createUser({...createUserDto});
+  async createUser(
+    @Args('createUserDto') createUserDto: CreateUserDto,
+  ): Promise<User> {
+    return await this.userService.createUser({ ...createUserDto });
   }
 }

@@ -6,9 +6,9 @@ import { Message } from '../../messages/entities/message.entity';
 export class Conversation {
   @Field(() => ID)
   id: string;
-  
+
   @Field()
-  title: string
+  title: string;
 
   @Field(() => [Message])
   messages: Message[];

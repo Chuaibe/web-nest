@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
 import { BullModule } from '@nestjs/bullmq';
 import { HealthController } from './health.controller';
-import { HealthProcessor } from './health.processor';
+// import { HealthProcessor } from './health.processor';
 import { HealthResolver } from './health.resolver';
 
 @Module({
@@ -11,6 +11,6 @@ import { HealthResolver } from './health.resolver';
     }),
   ],
   controllers: [HealthController],
-  providers: [HealthProcessor, HealthResolver],
+  providers: [HealthResolver],
 })
 export class HealthModule {}

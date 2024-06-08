@@ -12,23 +12,35 @@ export class ConversationService {
     return this.conversations;
   }
 
-  async createConversation(createConversationDto: CreateConversationDto): Promise<Conversation> {
-    const conversation = { id: uuidv4(), messages: [], ...createConversationDto};
-    this.conversations.push(conversation)
+  async createConversation(
+    createConversationDto: CreateConversationDto,
+  ): Promise<Conversation> {
+    const conversation = {
+      id: uuidv4(),
+      messages: [],
+      ...createConversationDto,
+    };
+    this.conversations.push(conversation);
     return conversation;
   }
 
-  async getMessagesByConversationId(conversationId: string): Promise<Message[]> {
-    const conversation = this.conversations.find(c => c.id === conversationId);
+  async getMessagesByConversationId(
+    conversationId: string,
+  ): Promise<Message[]> {
+    const conversation = this.conversations.find(
+      (c) => c.id === conversationId,
+    );
     if (!conversation) {
-      throw new NotFoundException(`Conversation with id ${conversationId} not found`);
+      throw new NotFoundException(
+        `Conversation with id ${conversationId} not found`,
+      );
     }
     return conversation.messages;
   }
 
   async getUserConversations(userId: string): Promise<Conversation[]> {
-    return this.conversations.filter(conversation => 
-      conversation.participants.some(p => p.id === userId)
+    return this.conversations.filter((conversation) =>
+      conversation.participants.some((p) => p.id === userId),
     );
   }
 }
