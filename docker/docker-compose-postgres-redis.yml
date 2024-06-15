@@ -1,18 +1,21 @@
 version: '3.8'
 
-name: 'postgres_web-nest'
-
 services:
   postgres:
     image: postgres:latest
     ports:
       - "${DATABASE_PORT}:5432"
     environment:
+      POSTGRES_DB: docker-compose-postgres-redis-db
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:
       - postgres_data:/var/lib/postgresql/data
-      - ./scripts/create-postgres-db.sql:/docker-entrypoint-initdb.d/create-postgres-db.sql
+
+  redis:
+    image: 'redis:latest'
+    ports:
+      - '6379:6379'
 
 volumes:
   postgres_data:

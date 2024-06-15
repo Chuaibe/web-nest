@@ -1,3 +1,6 @@
+version: '3.8'
+
+name: 'projet-web-nest_postgre-redis'
 services:
   app:
     build: .
@@ -5,6 +8,7 @@ services:
       - "3000:3000"
     depends_on:
       - redis
+      - localhost:24000
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
@@ -14,8 +18,22 @@ services:
     volumes:
       - .:/app
     command: sh -c "npm install && npm run build && npm start"
-
+  
   redis:
-    image: "redis:alpine"
+    image: redis:alpine
     ports:
       - "6379:6379"
+
+  postgres:
+    image: postgres:alpine
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_DB: projet-web_postgre-db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
