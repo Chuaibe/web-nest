@@ -1,16 +1,21 @@
-import { Field, ObjectType, InputType } from '@nestjs/graphql';
+import { Field, InputType } from '@nestjs/graphql';
+import { IsDate, IsString, IsUUID } from 'class-validator';
 
 @InputType()
 export class CreateMessageDto {
   @Field()
+  @IsString()
   content: string;
 
   @Field()
+  @IsUUID()
   senderId: string;
 
   @Field()
+  @IsUUID()
   conversationId: string;
 
   @Field()
-  timestamp: Date;
+  @IsDate()
+  timestamp: Date = new Date();
 }

@@ -9,12 +9,12 @@ export class UserResolver {
 
   @Query(() => [User])
   async users(): Promise<User[]> {
-    return await this.userService.getAllUsers();
+    return this.userService.getAllUsers();
   }
 
   @Query(() => User)
   async user(@Args('id') id: string): Promise<User> {
-    return await this.userService.getUserById(id);
+    return await this.userService.getUserByIdOrThrow(id);
   }
 
   @Query(() => User)
@@ -26,6 +26,6 @@ export class UserResolver {
   async createUser(
     @Args('createUserDto') createUserDto: CreateUserDto,
   ): Promise<User> {
-    return await this.userService.createUser({ ...createUserDto });
+    return await this.userService.addUser({ ...createUserDto });
   }
 }

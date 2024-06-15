@@ -1,6 +1,6 @@
 import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { User } from '../../users/entities/user.entity';
 import { Message } from '../../messages/entities/message.entity';
+import { ParticipantInputDto } from '../dtos/participant-input.dto';
 
 @ObjectType()
 export class Conversation {
@@ -13,6 +13,6 @@ export class Conversation {
   @Field(() => [Message])
   messages: Message[];
 
-  @Field(() => [User])
-  participants: User[];
+  @Field(() => [String])
+  participants: ParticipantInputDto[];
 }

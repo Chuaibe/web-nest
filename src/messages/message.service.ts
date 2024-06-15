@@ -1,20 +1,33 @@
 import { Injectable } from '@nestjs/common';
-import { Message } from './entities/message.entity';
 import { CreateMessageDto } from './dtos/create-message.dto';
-import { v4 as uuidv4 } from 'uuid';
+import { PrismaService } from '../infrastructure/prisma/prisma.service';
+import { UserService } from '../users/user.service';
+import { ConversationService } from '../conversations/conversation.service';
 
 @Injectable()
 export class MessageService {
-  private messages: Message[] = [];
+  constructor(
+    private readonly prisma: PrismaService,
+    private readonly userService: UserService,
+    private readonly conversationService: ConversationService,
+  ) {}
 
-  async findByConversationId(conversationId: string): Promise<Message[]> {
-    return this.messages.filter((m) => m.conversationId == conversationId);
+  async findMessageByConversationId(conversationId: string) {
+    return this.prisma.message.findMany({
+      where: { conversationId },
+    });
   }
 
-  async create(createMessageDto: CreateMessageDto): Promise<Message> {
-    const message = { id: uuidv4(), ...createMessageDto };
+  async createMessage(createMessageDto: CreateMessageDto) {
+    const { senderId, conversationId } = createMessageDto;
 
-    this.messages.push(message);
-    return message;
+    await this.conversationService.getConversationByIdOrThrow(conversationId);
+    await this.userService.getUserByIdOrThrow(senderId);
+
+    return this.prisma.message.create({
+      data: {
+        ...createMessageDto,
+      },
+    });
   }
 }

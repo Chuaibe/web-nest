@@ -9,28 +9,25 @@ export class ConversationResolver {
   constructor(private readonly conversationService: ConversationService) {}
 
   @Query(() => [Conversation])
-  async conversations(): Promise<Conversation[]> {
-    return await this.conversationService.getAllConversations();
+  async conversations() {
+    return this.conversationService.getAllConversations();
   }
 
   @Query(() => [Conversation])
-  async userConversations(
-    @Args('userID') userId: string,
-  ): Promise<Conversation[]> {
+  async userConversations(@Args('userId') userId: string) {
     return this.conversationService.getUserConversations(userId);
   }
 
   @Query(() => [Message])
-  async conversationMessages(
-    @Args('conversationId') conversationId: string,
-  ): Promise<Message[]> {
+  async conversationMessages(@Args('conversationId') conversationId: string) {
     return this.conversationService.getMessagesByConversationId(conversationId);
   }
 
   @Mutation(() => Conversation)
-  async createConversation(@Args('createConversationDto')
+  async createConversation(
+    @Args('createConversationDto')
     createConversationDto: CreateConversationDto,
-  ): Promise<Conversation> {
+  ) {
     return await this.conversationService.createConversation(
       createConversationDto,
     );

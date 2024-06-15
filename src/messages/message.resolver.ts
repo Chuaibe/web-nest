@@ -16,7 +16,7 @@ export class MessageResolver {
   async messages(
     @Args('conversationId') conversationId: string,
   ): Promise<Message[]> {
-    return await this.messageService.findByConversationId(conversationId);
+    return this.messageService.findMessageByConversationId(conversationId);
   }
 
   @Mutation(() => Message)

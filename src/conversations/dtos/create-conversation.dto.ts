@@ -1,11 +1,13 @@
-import { ObjectType, InputType, Field } from '@nestjs/graphql';
-import { User } from '../../users/entities/user.entity';
+import { InputType, Field } from '@nestjs/graphql';
+import { ParticipantInputDto } from './participant-input.dto';
+import { IsString } from 'class-validator';
 
 @InputType()
 export class CreateConversationDto {
   @Field()
+  @IsString()
   title: string;
 
-  @Field(() => [User])
-  participants: User[];
+  @Field(() => [String])
+  participants: ParticipantInputDto[];
 }
