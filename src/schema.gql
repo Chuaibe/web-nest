@@ -2,11 +2,23 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Conversation {
+  id: ID!
+  messages: [Message!]!
+  participants: [String!]!
+  title: String!
+}
+
+input CreateConversationDto {
+  participants: [String!]!
+  title: String!
+}
+
 input CreateMessageDto {
   content: String!
   conversationId: String!
   senderId: String!
-  timestamp: DateTime!
+  timestamp: DateTime! = "2024-06-15T15:20:56.154Z"
 }
 
 input CreateUserDto {
@@ -33,15 +45,19 @@ type Message {
 }
 
 type Mutation {
+  createConversation(createConversationDto: CreateConversationDto!): Conversation!
   createUser(createUserDto: CreateUserDto!): User!
   sendMessage(createMessageDto: CreateMessageDto!): Message!
 }
 
 type Query {
+  conversationMessages(conversationId: String!): [Message!]!
+  conversations: [Conversation!]!
   healthCheck: HealthCheckResult!
   messages(conversationId: String!): [Message!]!
   resetData: User!
   user(id: String!): User!
+  userConversations(userId: String!): [Conversation!]!
   users: [User!]!
 }
 

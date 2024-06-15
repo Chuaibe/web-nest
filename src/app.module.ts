@@ -11,7 +11,7 @@ import { UserModule } from './users/user.module';
 import { MessageProcessor } from './messages/message.processor';
 import { MessageService } from './messages/message.service';
 import { HealthProcessor } from './health/health.processor';
-// import { BullMqModule } from './bullMq.module';
+import { PrismaService } from './infrastructure/prisma/prisma.service';
 
 @Module({
   imports: [
@@ -35,6 +35,6 @@ import { HealthProcessor } from './health/health.processor';
     MessageModule,
   ],
   controllers: [HealthController],
-  providers: [MessageService, HealthProcessor, MessageProcessor],
+  providers: [PrismaService, MessageService, HealthProcessor, MessageProcessor],
 })
 export class AppModule {}
