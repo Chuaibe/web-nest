@@ -18,7 +18,7 @@ input CreateMessageDto {
   content: String!
   conversationId: String!
   senderId: String!
-  timestamp: DateTime! = "2024-07-08T08:23:50.099Z"
+  timestamp: DateTime! = "2024-07-08T10:19:57.649Z"
 }
 
 input CreateUserDto {
@@ -55,7 +55,7 @@ type Query {
   conversations: [Conversation!]!
   healthCheck: HealthCheckResult!
   messages(conversationId: String!): [Message!]!
-  resetData: User!
+  resetData: Boolean!
   user(id: String!): User!
   userConversations(userId: String!): [Conversation!]!
   users: [User!]!

@@ -50,9 +50,10 @@ export class UserService {
     return this.createUser(userDto);
   }
 
-  async resetData(): Promise<void> {
+  async resetData(): Promise<boolean> {
     try {
-      await this.prisma.user.deleteMany();
+      await this.prisma.user.deleteMany(); 
+      return true;
     } catch (error) {
       throw new error(
         `An error occurred while deleting all users: ${error.message()}`,

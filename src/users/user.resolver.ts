@@ -17,9 +17,9 @@ export class UserResolver {
     return await this.userService.getUserByIdOrThrow(id);
   }
 
-  @Query(() => User)
-  async resetData(): Promise<void> {
-    await this.userService.resetData();
+  @Query(() => Boolean)
+  async resetData(): Promise<boolean> {
+    return await this.userService.resetData();
   }
 
   @Mutation(() => User)
