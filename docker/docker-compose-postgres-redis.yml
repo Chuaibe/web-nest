@@ -6,7 +6,7 @@ services:
     ports:
       - "${DATABASE_PORT}:5432"
     environment:
-      POSTGRES_DB: docker-compose-postgres-redis-db
+      POSTGRES_DB: projet-web-nest
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
     volumes:

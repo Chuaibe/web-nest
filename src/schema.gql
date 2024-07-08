@@ -18,7 +18,7 @@ input CreateMessageDto {
   content: String!
   conversationId: String!
   senderId: String!
-  timestamp: DateTime! = "2024-06-15T15:20:56.154Z"
+  timestamp: DateTime! = "2024-07-08T08:23:50.099Z"
 }
 
 input CreateUserDto {
