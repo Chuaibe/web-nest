@@ -64,6 +64,16 @@ npm run start:postgres:redis:windows
 
 This command starts PostgreSQL and Redis using Docker Compose based on your `.env` configuration.
 
+### Primsa run
+after running the app, open another terminal to push the migration to the database
+```bash
+npx prisma db push
+```
+or
+```bash
+npm prisma db push
+```
+rerun the app
 ### 5. Run the application
 
 ```bash
